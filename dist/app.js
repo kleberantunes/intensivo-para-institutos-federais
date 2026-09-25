@@ -60,15 +60,21 @@ function setup(){
   const stateSelect=$('#stateSelect'), institutionSelect=$('#institutionSelect');
   const updateInstitutions=()=>{const s=data.states.find(x=>x[0]===stateSelect.value); const list=data.institutions[stateSelect.value]||[s?s[2]:'Instituto Federal']; institutionSelect.innerHTML=list.map(x=>`<option ${x===progress.institution?'selected':''}>${x}</option>`).join('');};
   stateSelect.onchange=updateInstitutions; updateInstitutions();
-  $('#setupForm').onsubmit=e=>{
+  $('#setupForm').onsubmit = (e) => {
     e.preventDefault();
-    progress.state=stateSelect.value;
-    progress.institution=institutionSelect.value;
+    if (!stateSelect.value) return;
+    progress.state = stateSelect.value;
+    progress.institution = institutionSelect.value;
     const selectedLevel = e.target.querySelector('input[name="level"]:checked');
     progress.level = selectedLevel ? selectedLevel.value : 'integrado';
     save();
-    toast('Plano regional configurado.');
-    home();
+    try {
+      toast('Plano regional configurado.');
+    } catch (err) {
+      console.warn('Toast:', err);
+    }
+    route('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 }
 
