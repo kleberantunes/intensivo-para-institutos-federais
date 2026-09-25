@@ -139,13 +139,16 @@ for (const [uf, sources] of Object.entries(data.sources)) {
   }
 }
 
-// 7. Validação do Modo Escuro com identidade visual do IF
+// 7. Validação do Modo Escuro Preto (Pure Black) e Borda Retangular sem arredondamento
 const stylesCss = fs.readFileSync(new URL('../dist/styles.css', import.meta.url), 'utf8');
 if (!stylesCss.includes('[data-theme="dark"]')) {
   errors.push('CSS não contém declarações para [data-theme="dark"].');
 }
-if (!stylesCss.includes('--paper:#091715') || !stylesCss.includes('--lime:#c4ec44')) {
-  errors.push('Paleta oficial do IF para modo escuro não encontrada no CSS.');
+if (!stylesCss.includes('--paper:#000000') || !stylesCss.includes('--lime:#c4ec44')) {
+  errors.push('Paleta de modo escuro preto (#000000) e verde lima não encontrada no CSS.');
+}
+if (!stylesCss.includes('border-radius:0!important')) {
+  errors.push('Regra de borda sem arredondamento (border-radius:0!important) não encontrada no CSS.');
 }
 
 const indexHtml = fs.readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
@@ -156,6 +159,18 @@ if (!indexHtml.includes('id="themeToggleBtn"') || !indexHtml.includes('aklabs-th
 const adminHtml = fs.readFileSync(new URL('../dist/admin.html', import.meta.url), 'utf8');
 if (!adminHtml.includes('id="themeToggleBtn"') || !adminHtml.includes('aklabs-theme')) {
   errors.push('Botão de tema ou script anti-flicker ausente no admin.html.');
+}
+
+// 8. Verificação de ausência total de emojis na aplicação
+const emojiRegex = /[\p{Extended_Pictographic}]/u;
+const distDir = new URL('../dist/', import.meta.url);
+for (const file of fs.readdirSync(distDir)) {
+  if (file.endsWith('.js') || file.endsWith('.html') || file.endsWith('.css')) {
+    const content = fs.readFileSync(new URL(file, distDir), 'utf8');
+    if (emojiRegex.test(content)) {
+      errors.push(`Arquivo dist/${file} ainda contém emojis.`);
+    }
+  }
 }
 
 // Teste funcional de alternância de tema
@@ -185,3 +200,6 @@ console.log(`- ${data.questions.length} questões no banco nacional.`);
 console.log(`- ${Object.values(data.sources).flat().length} fontes oficiais conferidas.`);
 console.log(`- Regra "se não logar não entra" rigorosamente atendida.`);
 console.log(`- Seleção obrigatória de estado e unidade do IF removida.`);
+console.log(`- Modo escuro configurado em preto (#000000).`);
+console.log(`- Bordas arredondadas removidas (border-radius: 0).`);
+console.log(`- Todos os emojis removidos com sucesso dos arquivos de distribuição.`);

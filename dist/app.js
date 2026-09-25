@@ -113,7 +113,9 @@ function initTheme(){
       }
     }
     if(btn){
-      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+      const sunSvg = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+      const moonSvg = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+      btn.innerHTML = theme === 'dark' ? sunSvg : moonSvg;
       if(typeof btn.setAttribute === 'function'){
         btn.setAttribute('title', theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro');
         btn.setAttribute('aria-label', theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro');
@@ -121,7 +123,7 @@ function initTheme(){
     }
     const meta = typeof document !== 'undefined' && typeof document.querySelector === 'function' ? document.querySelector('meta[name="theme-color"]') : null;
     if(meta && typeof meta.setAttribute === 'function'){
-      meta.setAttribute('content', theme === 'dark' ? '#091715' : '#063b35');
+      meta.setAttribute('content', theme === 'dark' ? '#000000' : '#063b35');
     }
   };
 
@@ -186,29 +188,29 @@ function login(){
             <span>Entrar com o Google para Acessar</span>
           </button>
           <div class="login-secure-notice">
-            <span>🔒 Acesso exclusivo com conta Google. Seus resultados e simulados ficam salvos com segurança.</span>
+            <span>Acesso exclusivo com conta Google. Seus resultados e simulados ficam salvos com segurança.</span>
           </div>
         </div>
       </div>
 
       <div class="login-hero-card">
-        <div class="hero-metric-pill">✨ 100% Gratuito</div>
+        <div class="hero-metric-pill">100% Gratuito</div>
         <h3>O que você encontra no IFintenso:</h3>
         <ul class="login-feature-list">
           <li>
-            <strong>🎯 Banco Nacional de Questões</strong>
+            <strong>Banco Nacional de Questões</strong>
             <span>Questões reais de provas oficiais do IFSC, IFSP, IFG, IFRN, IFPE e outros, com resolução e gabarito comentado.</span>
           </li>
           <li>
-            <strong>⚡ Simulados Inteligentes</strong>
+            <strong>Simulados Inteligentes</strong>
             <span>Treine no formato real dos exames de seleção e descubra onde você precisa reforçar seus estudos.</span>
           </li>
           <li>
-            <strong>☁️ Sincronização em Nuvem</strong>
+            <strong>Sincronização em Nuvem</strong>
             <span>Inicie no computador e continue no celular. Seu desempenho fica salvo na sua conta Google.</span>
           </li>
           <li>
-            <strong>📚 Caderno de Erros Automático</strong>
+            <strong>Caderno de Erros Automático</strong>
             <span>Revise facilmente as questões que você errou para não repetir os mesmos equívocos na prova real.</span>
           </li>
         </ul>
@@ -258,7 +260,7 @@ function exams(){
   const available=Object.entries(data.sources).flatMap(([uf,sources])=>sources.filter(s=>s.institution!=='MEC').map(s=>({...s,uf})));
   const filtered=examFilterState?available.filter(s=>s.uf===examFilterState):available;
   const options=data.states.map(s=>`<option value="${s[0]}" ${s[0]===examFilterState?'selected':''}>${s[1]} (${s[0]})</option>`).join('');
-  app.innerHTML=`<div class="shell"><div class="section-title"><div><span class="eyebrow">Acervo oficial</span><h1>Provas e gabaritos</h1><p>Consulte cadernos e gabaritos oficiais das instituições. Você pode filtrar por estado a qualquer momento.</p></div></div><label class="exam-filter">Filtrar por Estado <select id="examState"><option value="">Todos os estados (${available.length} links)</option>${options}</select></label>${filtered.length?`<section class="exam-list">${filtered.map(s=>`<a class="exam" href="${s.url}" target="_blank" rel="noopener"><div><span>${s.institution} · ${s.uf}</span><h2>${s.title}</h2><p>${s.detail}</p></div><strong>Ver acervo ↗</strong></a>`).join('')}</section>`:`<section class="empty"><h2>Ainda não há links cadastrados para este estado.</h2><p>Continue praticando com o banco nacional enquanto ampliamos o acervo.</p><button class="btn primary" data-route="study">Estudar agora</button></section>`}</div>`;
+  app.innerHTML=`<div class="shell"><div class="section-title"><div><span class="eyebrow">Acervo oficial</span><h1>Provas e gabaritos</h1><p>Consulte cadernos e gabaritos oficiais das instituições. Você pode filtrar por estado a qualquer momento.</p></div></div><label class="exam-filter">Filtrar por Estado <select id="examState"><option value="">Todos os estados (${available.length} links)</option>${options}</select></label>${filtered.length?`<section class="exam-list">${filtered.map(s=>`<a class="exam" href="${s.url}" target="_blank" rel="noopener"><div><span>${s.institution} · ${s.uf}</span><h2>${s.title}</h2><p>${s.detail}</p></div><strong>Ver acervo &rarr;</strong></a>`).join('')}</section>`:`<section class="empty"><h2>Ainda não há links cadastrados para este estado.</h2><p>Continue praticando com o banco nacional enquanto ampliamos o acervo.</p><button class="btn primary" data-route="study">Estudar agora</button></section>`}</div>`;
   $('#examState').onchange=e=>{examFilterState=e.target.value;exams();};
 }
 
