@@ -23,6 +23,8 @@ O formato é baseado no [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
   - Pipeline de automação para extração em lote dos cadernos oficiais para atingir a meta mínima de 300 questões.
 - **Política Ativa de Change Log Contínuo:**
   - Instituição da obrigatoriedade de versionamento e registro de changelog para todas as conversas e alterações do projeto.
+- **Documentação da Conversa (`docs/HISTORICO_CONVERSA.md`):**
+  - Compilação estruturada em Markdown de todas as demandas do usuário, passos executados, comandos, decisões de arquitetura e histórico de commits.
 
 ---
 
