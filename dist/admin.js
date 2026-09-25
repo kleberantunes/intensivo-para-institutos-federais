@@ -105,7 +105,7 @@
             photo: data.userPhoto || "",
             status: data.status || "active",
             state: data.state || "Não informada",
-            institution: data.institution || "Geral",
+            institution: data.institution || "",
             level: data.level || "integrado",
             answered: data.answered || 0,
             correct: data.correct || 0,
@@ -150,8 +150,7 @@
       let filtered = allStudents.filter(u => {
         const matchesQuery = u.name.toLowerCase().includes(query) ||
                              u.email.toLowerCase().includes(query) ||
-                             u.state.toLowerCase().includes(query) ||
-                             u.institution.toLowerCase().includes(query);
+                             u.state.toLowerCase().includes(query);
         const matchesStatus = status === "all" ||
                               (status === "active" && u.status !== "blocked") ||
                               (status === "blocked" && u.status === "blocked");
@@ -193,7 +192,7 @@
             </td>
             <td>
               <div><b>${u.state !== 'Não informada' ? u.state : 'Sem UF'}</b></div>
-              <small style="color:var(--muted);">${u.institution}</small>
+              <small style="color:var(--muted);">${u.state || 'UF não informada'}</small>
             </td>
             <td>
               <span class="status-badge ${isBlocked ? 'blocked' : 'active'}">
@@ -257,7 +256,7 @@
                 <img class="student-avatar" src="${u.photo || defaultAvatar}" alt="Avatar">
                 <div class="student-info">
                   <h3 style="margin:0;">${u.name}</h3>
-                  <small>${u.email} · Região: ${u.state} (${u.institution})</small>
+                  <small>${u.email} · Estado: ${u.state || 'não informado'}</small>
                 </div>
               </div>
               <button class="btn light" onclick="window.closeDetailModal()" style="padding:6px 12px; font-size:1.1rem;">&times;</button>

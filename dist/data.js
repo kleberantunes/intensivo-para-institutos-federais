@@ -9,10 +9,6 @@ window.IF_DATA = {
     ['RS','Rio Grande do Sul','IFRS / IFSul / IFFar'],['RO','Rondônia','IFRO'],['RR','Roraima','IFRR'],
     ['SC','Santa Catarina','IFSC / IFC'],['SP','São Paulo','IFSP'],['SE','Sergipe','IFS'],['TO','Tocantins','IFTO']
   ],
-  institutions: {
-    RS: ['IFRS — Instituto Federal do Rio Grande do Sul','IFSul — Instituto Federal Sul-rio-grandense','IFFar — Instituto Federal Farroupilha'],
-    SC: ['IFSC — Instituto Federal de Santa Catarina','IFC — Instituto Federal Catarinense']
-  },
   sources: {
     RS: [
       {institution:'IFRS',title:'Provas e gabaritos anteriores',detail:'Cursos integrados, subsequentes e superiores · 2014–2026',url:'https://ingresso.ifrs.edu.br/2027/provas-e-gabaritos-anteriores/',verified:true},

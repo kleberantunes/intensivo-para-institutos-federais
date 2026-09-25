@@ -78,7 +78,7 @@
 
       const merged = { ...local };
       merged.state = cloud.state || local.state || '';
-      merged.institution = cloud.institution || local.institution || '';
+      delete merged.institution; // preferência antiga: a seleção agora é feita por UF
       merged.level = cloud.level || local.level || 'integrado';
 
       if ((cloud.answered || 0) >= (local.answered || 0)) {
