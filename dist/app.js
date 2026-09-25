@@ -235,7 +235,7 @@ function home(){
       <div><span class="eyebrow">Sua preparação nacional</span><h1>Estude com questões de todo o Brasil.</h1><p>Questões oficiais organizadas por matéria, acervo de provas e simulados no formato dos Institutos Federais.</p><div class="actions"><button class="btn primary" data-route="quiz">Começar simulado</button><button class="btn light" data-route="exams">Ver provas anteriores</button></div></div>
       <aside class="profile-card"><span class="profile-label">Meu progresso</span><strong>${progress.answered} questões respondidas</strong><span>${window.cloudSync?.isReady()?'Sincronização com Google ativada':'Salvo na sua conta'}</span><button data-route="progress">Ver desempenho</button></aside>
     </section>
-    <section class="metrics" aria-label="Resumo do progresso"><div><strong>${progress.answered}</strong><span>questões respondidas</span></div><div><strong>${rate}%</strong><span>taxa de acerto</span></div><div><strong>${questionPool().length}</strong><span>questões disponíveis</span></div></section>
+    <section class="metrics" aria-label="Resumo do progresso"><div><strong>${progress.answered}</strong><span>questões respondidas</span></div><div><strong>${rate}%</strong><span>taxa de acerto</span></div><div><strong>27</strong><span>UFs no acervo</span></div></section>
     <div class="section-title"><div><span class="eyebrow">Seu caminho</span><h2>O que fazer agora</h2></div></div>
     <section class="cards"><button class="feature" data-route="study"><span class="feature-number">01</span><h3>Estudar por matéria</h3><p>Escolha a área e pratique com questões oficiais de todo o Brasil.</p></button><button class="feature featured" data-route="quiz"><span class="feature-number">02</span><h3>Simulado nacional</h3><p>Uma rodada completa no padrão dos Institutos Federais.</p></button><button class="feature" data-route="exams"><span class="feature-number">03</span><h3>Provas reais</h3><p>Consulte cadernos e gabaritos oficiais por estado.</p></button></section>
   </div>`;
@@ -243,7 +243,7 @@ function home(){
 
 function study(){
   const subjects=[...new Set(questionPool().map(q=>q.subject))];
-  app.innerHTML=`<div class="shell"><div class="section-title"><div><span class="eyebrow">Banco nacional</span><h1>Escolha uma área</h1><p>Pratique com questões de todos os estados, com indicação da origem.</p></div></div><section class="subject-grid">${subjects.map((s,i)=>`<button class="subject" data-route="quiz" data-arg="${s}"><span>0${i+1}</span><h2>${s}</h2><p>${questionPool().filter(q=>q.subject===s).length} questões disponíveis</p></button>`).join('')}</section></div>`;
+  app.innerHTML=`<div class="shell"><div class="section-title"><div><span class="eyebrow">Banco nacional</span><h1>Escolha uma área</h1><p>Pratique com questões de todos os estados, com indicação da origem.</p></div></div><section class="subject-grid">${subjects.map((s,i)=>`<button class="subject" data-route="quiz" data-arg="${s}"><span>0${i+1}</span><h2>${s}</h2><p>Questões oficiais comentadas</p></button>`).join('')}</section></div>`;
 }
 
 function quiz(subject){
