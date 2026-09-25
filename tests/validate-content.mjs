@@ -34,18 +34,29 @@ const fakeElement = () => ({
 
 const elements = new Map();
 const storage = new Map();
+const docElementMock = {
+  attrs: new Map(),
+  getAttribute(k) { return this.attrs.get(k) || null; },
+  setAttribute(k, v) { this.attrs.set(k, String(v)); },
+  removeAttribute(k) { this.attrs.delete(k); }
+};
+
 const appContext = vm.createContext({
   window: { IF_DATA: data },
   document: {
+    documentElement: docElementMock,
     querySelector(selector) {
       if (!elements.has(selector)) elements.set(selector, fakeElement());
       return elements.get(selector);
+    },
+    getElementById(id) {
+      return this.querySelector('#' + id);
     },
     addEventListener() {}
   },
   localStorage: {
     getItem(key) { return storage.get(key) || null; },
-    setItem(key, value) { storage.set(key, value); },
+    setItem(key, value) { storage.set(key, String(value)); },
     removeItem(key) { storage.delete(key); }
   },
   sessionStorage: {
@@ -125,6 +136,41 @@ if (vm.runInContext('progress.answered', appContext) !== 7) {
 for (const [uf, sources] of Object.entries(data.sources)) {
   for (const source of sources) {
     if (!source.url.startsWith('https://')) errors.push(`Fonte sem HTTPS em ${uf}.`);
+  }
+}
+
+// 7. Validação do Modo Escuro com identidade visual do IF
+const stylesCss = fs.readFileSync(new URL('../dist/styles.css', import.meta.url), 'utf8');
+if (!stylesCss.includes('[data-theme="dark"]')) {
+  errors.push('CSS não contém declarações para [data-theme="dark"].');
+}
+if (!stylesCss.includes('--paper:#091715') || !stylesCss.includes('--lime:#c4ec44')) {
+  errors.push('Paleta oficial do IF para modo escuro não encontrada no CSS.');
+}
+
+const indexHtml = fs.readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
+if (!indexHtml.includes('id="themeToggleBtn"') || !indexHtml.includes('aklabs-theme')) {
+  errors.push('Botão de tema ou script anti-flicker ausente no index.html.');
+}
+
+const adminHtml = fs.readFileSync(new URL('../dist/admin.html', import.meta.url), 'utf8');
+if (!adminHtml.includes('id="themeToggleBtn"') || !adminHtml.includes('aklabs-theme')) {
+  errors.push('Botão de tema ou script anti-flicker ausente no admin.html.');
+}
+
+// Teste funcional de alternância de tema
+const themeBtn = elements.get('#themeToggleBtn');
+if (!themeBtn || typeof themeBtn.onclick !== 'function') {
+  errors.push('Handler de clique no botão de tema não foi registrado.');
+} else {
+  // Inicialmente sem tema escuro (modo claro)
+  themeBtn.onclick();
+  if (docElementMock.getAttribute('data-theme') !== 'dark' || storage.get('aklabs-theme') !== 'dark') {
+    errors.push('Alternância para modo escuro falhou no app.');
+  }
+  themeBtn.onclick();
+  if (docElementMock.getAttribute('data-theme') !== null || storage.get('aklabs-theme') !== 'light') {
+    errors.push('Alternância de volta para modo claro falhou no app.');
   }
 }
 

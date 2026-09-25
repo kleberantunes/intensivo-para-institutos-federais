@@ -7,7 +7,20 @@
   <meta name="description" content="Plataforma nacional de preparação para processos seletivos dos Institutos Federais do Brasil.">
   <title>IFintenso — Preparação Nacional para os Institutos Federais</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="styles.css?v=0.6.0">
+  <link rel="stylesheet" href="styles.css?v=0.7.0">
+  <script>
+    (function(){
+      try {
+        var saved = localStorage.getItem('aklabs-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', '#091715');
+        }
+      } catch(e) {}
+    })();
+  </script>
 </head>
 <body>
   <header class="topbar">
@@ -17,6 +30,7 @@
     </button>
 
     <div class="topbar-actions">
+      <button id="themeToggleBtn" class="btn-theme-toggle" aria-label="Alternar modo escuro" title="Alternar modo escuro">🌙</button>
       <div id="authContainer" class="auth-box">
         <button id="loginBtn" class="btn-google" aria-label="Entrar com o Google">
           <svg class="google-icon" viewBox="0 0 24 24" width="16" height="16">
@@ -45,11 +59,11 @@
     </nav>
   </header>
   <main id="app" tabindex="-1"></main>
-  <footer><span>v0.6.0</span><span>Developed by AK Labs</span></footer>
+  <footer><span>v0.7.0</span><span>Developed by AK Labs</span></footer>
   <div id="toast" role="status" aria-live="polite"></div>
-  <script src="data.js?v=0.6.0"></script>
+  <script src="data.js?v=0.7.0"></script>
   <script src="firebase-config.js?v=0.4.1"></script>
-  <script src="app.js?v=0.6.0"></script>
-  <script src="auth.js?v=0.6.0"></script>
+  <script src="app.js?v=0.7.0"></script>
+  <script src="auth.js?v=0.7.0"></script>
 </body>
 </html>

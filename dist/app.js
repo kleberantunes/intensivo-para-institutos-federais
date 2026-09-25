@@ -98,6 +98,45 @@ document.addEventListener('click', e => {
 
 if($('#menuBtn')) $('#menuBtn').onclick = () => $('#nav').classList.toggle('open');
 
+function initTheme(){
+  const btn = typeof document !== 'undefined' ? (document.getElementById ? document.getElementById('themeToggleBtn') : (document.querySelector ? document.querySelector('#themeToggleBtn') : null)) : null;
+  const docEl = typeof document !== 'undefined' ? document.documentElement : null;
+  const getTheme = () => (docEl && typeof docEl.getAttribute === 'function' && docEl.getAttribute('data-theme') === 'dark') ? 'dark' : 'light';
+  const applyTheme = (theme) => {
+    if(docEl){
+      if(theme === 'dark'){
+        if(typeof docEl.setAttribute === 'function') docEl.setAttribute('data-theme', 'dark');
+      } else {
+        if(typeof docEl.removeAttribute === 'function') docEl.removeAttribute('data-theme');
+      }
+    }
+    if(btn){
+      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+      if(typeof btn.setAttribute === 'function'){
+        btn.setAttribute('title', theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro');
+        btn.setAttribute('aria-label', theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro');
+      }
+    }
+    const meta = typeof document !== 'undefined' && typeof document.querySelector === 'function' ? document.querySelector('meta[name="theme-color"]') : null;
+    if(meta && typeof meta.setAttribute === 'function'){
+      meta.setAttribute('content', theme === 'dark' ? '#091715' : '#063b35');
+    }
+  };
+
+  applyTheme(getTheme());
+
+  if(btn){
+    btn.onclick = () => {
+      const next = getTheme() === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try {
+        localStorage.setItem('aklabs-theme', next);
+      } catch(e) {}
+    };
+  }
+}
+initTheme();
+
 window.onIFLogin = () => {
   updateNavVisibility();
   route('home');
