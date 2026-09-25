@@ -14,6 +14,17 @@ O formato é baseado no [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 
 ---
 
+## [0.9.1] - 2026-09-25
+
+### Adicionado
+- **Capinha Visual de Entrada do Guia IFintenso (Mockup Oficial):**
+  - Implementação de capa estilizada inspirada no livro/guia dos Institutos Federais, com lombada vermelha (`border-left: 14px solid #e52320`), emblema oficial vetorial dos Institutos Federais (9 quadrados verdes e 1 esfera vermelha), identificador da Edição 2026 e menção aos 4 eixos curriculares.
+  - Bloqueio estrito de acesso: nenhuma tela interna de estudo, simulado ou desempenho pode ser aberta antes do login com o Google.
+  - Botão de ação direta "Entrar com o Google para Liberar Acesso" com aviso de segurança e ícone SVG de cadeado.
+  - Validação automatizada em `tests/validate-content.mjs` que assegura a renderização da capinha no estado desautenticado.
+
+---
+
 ## [0.9.0] - 2026-09-25
 
 ### Adicionado

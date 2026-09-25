@@ -75,9 +75,9 @@ if (vm.runInContext('questionPool().length', appContext) !== data.questions.leng
   errors.push('Banco nacional de questões incompleto.');
 }
 
-// 1. Sem login: a tela inicial deve apresentar o login com o Google
-if (!elements.get('#app').innerHTML.includes('Entrar com o Google')) {
-  errors.push('A página inicial com foco no login do Google não foi exibida.');
+// 1. Sem login: a tela inicial deve apresentar a capinha do IFintenso com login do Google
+if (!elements.get('#app').innerHTML.includes('Entrar com o Google') || !elements.get('#app').innerHTML.includes('capa-book')) {
+  errors.push('A capinha de entrada com foco no login do Google não foi exibida.');
 }
 
 // 2. "Se não logar não entra": tentar navegar sem autenticação deve bloquear e permanecer no login
