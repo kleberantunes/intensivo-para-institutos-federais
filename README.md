@@ -69,7 +69,8 @@ A plataforma conta com um dashboard administrativo completo localizado em [`dist
 ```bash
 firebase deploy
 ```
-URL ao vivo: `https://intensivo-if-2026.web.app`
+URL ao vivo: `https://ifintenso.web.app`
+Painel Admin: `https://ifintenso.web.app/admin.html`
 
 ---
 
