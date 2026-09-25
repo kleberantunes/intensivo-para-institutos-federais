@@ -11,6 +11,13 @@ function save(){
     window.cloudSync.scheduleSave(progress);
   }
 }
+function toast(message){
+  const el=$('#toast');
+  if(!el) return;
+  el.textContent=message;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2200);
+}
 window.toast = toast;
 window.getProgressState = () => progress;
 window.applyCloudProgress = (cloudProgress) => {
@@ -35,7 +42,7 @@ $('#menuBtn').onclick=()=>$('#nav').classList.toggle('open');
 
 function home(){
   if(!progress.state) return setup();
-  const info=stateInfo(); const rate=progress.answered?Math.round(progress.correct/progress.answered*100):0;
+  const info=stateInfo() || ['RS', 'Rio Grande do Sul', 'IFRS']; const rate=progress.answered?Math.round(progress.correct/progress.answered*100):0;
   app.innerHTML=`<div class="shell">
     <section class="welcome">
       <div><span class="eyebrow">Sua preparação para ${info[1]}</span><h1>Estude com o foco da sua região.</h1><p>Questões por área, acervo de provas oficiais e um plano que aprende com seus resultados.</p><div class="actions"><button class="btn primary" data-route="quiz">Começar simulado</button><button class="btn light" data-route="exams">Ver provas anteriores</button></div></div>
@@ -53,7 +60,16 @@ function setup(){
   const stateSelect=$('#stateSelect'), institutionSelect=$('#institutionSelect');
   const updateInstitutions=()=>{const s=data.states.find(x=>x[0]===stateSelect.value); const list=data.institutions[stateSelect.value]||[s?s[2]:'Instituto Federal']; institutionSelect.innerHTML=list.map(x=>`<option ${x===progress.institution?'selected':''}>${x}</option>`).join('');};
   stateSelect.onchange=updateInstitutions; updateInstitutions();
-  $('#setupForm').onsubmit=e=>{e.preventDefault(); progress.state=stateSelect.value; progress.institution=institutionSelect.value; progress.level=e.target.level.value; save(); toast('Plano regional configurado.'); home();};
+  $('#setupForm').onsubmit=e=>{
+    e.preventDefault();
+    progress.state=stateSelect.value;
+    progress.institution=institutionSelect.value;
+    const selectedLevel = e.target.querySelector('input[name="level"]:checked');
+    progress.level = selectedLevel ? selectedLevel.value : 'integrado';
+    save();
+    toast('Plano regional configurado.');
+    home();
+  };
 }
 
 function study(){
