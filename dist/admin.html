@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#063b35">
+  <meta name="description" content="Dashboard de controle de acesso e acompanhamento pedagógico - Intensivo IF.">
+  <title>Painel de Controle de Acesso · Intensivo IF</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="brand" aria-label="Ir ao aplicativo">
+      <span class="brand-mark">IF</span>
+      <span><strong>INTENSIVO IF</strong><small>Painel de Controle de Acesso</small></span>
+    </a>
+
+    <div class="topbar-actions">
+      <a href="index.html" class="btn light" style="font-size: 0.82rem; padding: 8px 14px; text-decoration: none;">← Voltar ao App</a>
+      <div id="adminProfile" class="user-profile hidden">
+        <img id="adminAvatar" class="user-avatar" src="" alt="Admin">
+        <span id="adminName" class="user-name"></span>
+        <button id="adminLogoutBtn" class="btn-logout" title="Sair da conta">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="adminApp">
+    <div class="admin-shell">
+      <div id="loadingState" style="text-align: center; padding: 80px 20px;">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;">⏳</div>
+        <h2 style="color: var(--forest);">Carregando painel de controle...</h2>
+        <p style="color: var(--muted);">Verificando permissões de administrador no Firebase.</p>
+      </div>
+
+      <div id="authGate" class="auth-gate hidden">
+        <div class="auth-gate-icon">🔒</div>
+        <h2>Área Restrita</h2>
+        <p id="gateMessage">Este painel é de acesso exclusivo para a administração. Faça login com a conta Google autorizada.</p>
+        <button id="gateLoginBtn" class="btn primary">Entrar com Google</button>
+        <div style="margin-top: 14px;">
+          <a href="index.html" style="color: var(--muted); font-size: 0.85rem; text-decoration: underline;">Ir para a página de estudos</a>
+        </div>
+      </div>
+
+      <div id="dashboardView" class="hidden">
+        <div class="admin-header">
+          <div>
+            <span class="eyebrow">Gestão de Estudantes</span>
+            <h1>Controle de Acesso & Acompanhamento IF</h1>
+            <p>Gerencie permissões de acesso, acompanhe a instituição/UF de cada aluno e monitore o rendimento nos simulados em tempo real.</p>
+          </div>
+          <div class="admin-actions">
+            <button id="refreshBtn" class="btn light" style="font-size: 0.85rem;">🔄 Atualizar Lista</button>
+          </div>
+        </div>
+
+        <!-- KPIs -->
+        <section class="kpi-grid">
+          <div class="kpi-card">
+            <small>Total de Alunos</small>
+            <div id="kpiTotalUsers" class="stat">0</div>
+            <div class="subtext">Registrados no sistema</div>
+          </div>
+          <div class="kpi-card">
+            <small>Acessos Liberados</small>
+            <div id="kpiActiveUsers" class="stat" style="color: #15803d;">0</div>
+            <div class="subtext">Com acesso ativo</div>
+          </div>
+          <div class="kpi-card">
+            <small>Acessos Bloqueados</small>
+            <div id="kpiBlockedUsers" class="stat" style="color: #dc2626;">0</div>
+            <div class="subtext">Acesso suspenso</div>
+          </div>
+          <div class="kpi-card">
+            <small>Questões Resolvidas</small>
+            <div id="kpiTotalQuestions" class="stat" style="color: var(--forest);">0</div>
+            <div class="subtext">Nos simulados regionais</div>
+          </div>
+          <div class="kpi-card">
+            <small>Média de Acertos</small>
+            <div id="kpiAverageRate" class="stat" style="color: #0d9488;">0%</div>
+            <div class="subtext">Geral dos alunos</div>
+          </div>
+        </section>
+
+        <!-- Filtros e Busca -->
+        <section class="filter-bar">
+          <div class="search-input-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Buscar por aluno, e-mail, UF ou Instituto...">
+          </div>
+          <div>
+            <select id="statusFilter" class="filter-select">
+              <option value="all">Todos os Status</option>
+              <option value="active">Apenas Ativos (Liberados)</option>
+              <option value="blocked">Apenas Bloqueados</option>
+            </select>
+          </div>
+          <div>
+            <select id="sortBy" class="filter-select">
+              <option value="lastActive">Mais Recentes</option>
+              <option value="questions">Mais Questões Feitas</option>
+              <option value="rate">Maior Taxa de Acerto</option>
+              <option value="name">Nome (A-Z)</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Tabela -->
+        <section class="table-card">
+          <div class="table-responsive">
+            <table class="user-table">
+              <thead>
+                <tr>
+                  <th>Estudante</th>
+                  <th>Região / Instituto</th>
+                  <th>Status</th>
+                  <th>Último Acesso</th>
+                  <th>Questões / Acerto</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody">
+                <!-- Linhas geradas via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="detailModalContainer"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="firebase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
