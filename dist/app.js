@@ -51,6 +51,8 @@ window.useIFAccount = (uid) => {
 window.applyCloudProgress = (cloudProgress) => {
   for(const key of Object.keys(progress)) delete progress[key];
   Object.assign(progress, emptyProgress(), cloudProgress);
+  delete progress.institution;
+  delete progress.state;
   save();
   if(typeof window.refreshRoute === 'function'){
     window.refreshRoute();
