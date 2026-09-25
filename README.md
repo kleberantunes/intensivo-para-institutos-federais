@@ -100,6 +100,7 @@ Painel Admin: `https://ifintenso.web.app/admin.html`
 
 - [x] v0.1.0: Seleção de UF, instituição e modalidade; estudo por área; simulado regional; progresso local.
 - [x] v0.4.0: Autenticação Google via Firebase Auth, sincronização no Firestore e Dashboard de controle de acesso e acompanhamento pedagógico (`admin.html`).
+- [x] v0.5.0: Registro nacional das fontes oficiais dos 38 Institutos Federais e política de ingestão do banco de questões.
 - [ ] v1.0.0: Catálogo nacional ampliado e planos de estudo por edital.
 
 Developed by AK Labs

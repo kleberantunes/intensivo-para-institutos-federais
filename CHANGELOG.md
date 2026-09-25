@@ -2,6 +2,13 @@
 
 Todas as mudanças relevantes deste projeto serão documentadas aqui. O formato segue Keep a Changelog e o versionamento segue Semantic Versioning.
 
+## [0.5.0] - 2026-09-25
+
+### Adicionado
+- Registro nacional estruturado das 38 instituições federais, com fontes oficiais, estado da descoberta e cobertura conhecida.
+- Política editorial e modelo de dados para ingestão rastreável de provas e questões.
+- Validação automatizada da cobertura institucional e dos campos mínimos do registro.
+
 ## [0.4.0] - 2026-09-24
 
 ### Adicionado
