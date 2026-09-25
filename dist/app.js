@@ -172,11 +172,12 @@ function login(){
   }
 
   app.innerHTML=`<div class="shell">
-    <div class="login-hero">
+    <div class="capa-wrapper">
       <div class="login-hero-content">
-        <span class="eyebrow-badge">Plataforma Nacional · Institutos Federais</span>
+        <span class="eyebrow-badge">Preparação Nacional Oficial · Institutos Federais</span>
         <h1>Sua aprovação no Instituto Federal começa aqui.</h1>
-        <p class="login-hero-sub">Estude com questões oficiais de processos seletivos de todo o Brasil, resolva simulados com gabaritos comentados e acompanhe sua evolução em tempo real.</p>
+        <p class="login-hero-sub">Banco unificado de questões oficiais dos processos seletivos do Brasil inteiro, simulados cronometrados com resoluções comentadas passo a passo e caderno de erros inteligente.</p>
+
         <div class="login-cta-box">
           <button class="btn-google-hero" id="loginHeroBtn" type="button">
             <svg class="google-icon-hero" viewBox="0 0 24 24" width="22" height="22">
@@ -185,35 +186,64 @@ function login(){
               <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.16 0 9.97 0 12s.45 3.84 1.25 5.42l4.03-3.15z"/>
               <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
             </svg>
-            <span>Entrar com o Google para Acessar</span>
+            <span>Entrar com o Google para Liberar Acesso</span>
           </button>
           <div class="login-secure-notice">
-            <span>Acesso exclusivo com conta Google. Seus resultados e simulados ficam salvos com segurança.</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+            <span>Acesso liberado imediatamente após o login. Progresso sincronizado na nuvem.</span>
+          </div>
+        </div>
+
+        <div class="login-feature-strip">
+          <div>
+            <strong>Acervo Nacional Oficial</strong>
+            <span>Provas reais de 27 UFs com gabaritos conferidos</span>
+          </div>
+          <div>
+            <strong>Resoluções Comentadas</strong>
+            <span>Explicação passo a passo em todas as questões</span>
+          </div>
+          <div>
+            <strong>100% Gratuito</strong>
+            <span>Inicie no computador e continue no celular</span>
           </div>
         </div>
       </div>
 
-      <div class="login-hero-card">
-        <div class="hero-metric-pill">100% Gratuito</div>
-        <h3>O que você encontra no IFintenso:</h3>
-        <ul class="login-feature-list">
-          <li>
-            <strong>Banco Nacional de Questões</strong>
-            <span>Questões reais de provas oficiais do IFSC, IFSP, IFG, IFRN, IFPE e outros, com resolução e gabarito comentado.</span>
-          </li>
-          <li>
-            <strong>Simulados Inteligentes</strong>
-            <span>Treine no formato real dos exames de seleção e descubra onde você precisa reforçar seus estudos.</span>
-          </li>
-          <li>
-            <strong>Sincronização em Nuvem</strong>
-            <span>Inicie no computador e continue no celular. Seu desempenho fica salvo na sua conta Google.</span>
-          </li>
-          <li>
-            <strong>Caderno de Erros Automático</strong>
-            <span>Revise facilmente as questões que você errou para não repetir os mesmos equívocos na prova real.</span>
-          </li>
-        </ul>
+      <!-- CAPINHA BONITINHA DO GUIA IFINTENSO -->
+      <div class="capa-book">
+        <div class="capa-book-badge">
+          <span>Edição 2026</span>
+          <span>Guia Oficial</span>
+        </div>
+        <div class="capa-book-emblem">
+          <svg width="68" height="68" viewBox="0 0 48 48" fill="none">
+            <circle cx="9" cy="9" r="6" fill="#e52320"/>
+            <rect x="18" y="3" width="12" height="12" fill="#2e7d32"/>
+            <rect x="33" y="3" width="12" height="12" fill="#2e7d32"/>
+            <rect x="3" y="18" width="12" height="12" fill="#2e7d32"/>
+            <rect x="18" y="18" width="12" height="12" fill="#2e7d32"/>
+            <rect x="33" y="18" width="12" height="12" fill="#2e7d32"/>
+            <rect x="3" y="33" width="12" height="12" fill="#2e7d32"/>
+            <rect x="18" y="33" width="12" height="12" fill="#2e7d32"/>
+            <rect x="33" y="33" width="12" height="12" fill="#2e7d32"/>
+          </svg>
+        </div>
+        <div class="capa-book-title">
+          <span>Institutos Federais</span>
+          <h2>IFintenso</h2>
+          <p class="capa-book-desc">Intensivo Completo para os Exames de Seleção dos Cursos Técnicos Integrados ao Ensino Médio</p>
+        </div>
+        <div class="capa-book-tags">
+          <div class="capa-tag-item">Matemática</div>
+          <div class="capa-tag-item">Língua Portuguesa</div>
+          <div class="capa-tag-item">Ciências da Natureza</div>
+          <div class="capa-tag-item">Ciências Humanas</div>
+        </div>
+        <div class="capa-book-footer">
+          <span>27 UFs Cobertas</span>
+          <span>Gabarito Comentado</span>
+        </div>
       </div>
     </div>
   </div>`;
