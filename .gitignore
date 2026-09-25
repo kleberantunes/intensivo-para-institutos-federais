@@ -1,0 +1,9 @@
+.sites-runtime/
+.env
+.env.*
+!.env.example
+node_modules/
+*.log
+release/*.zip
+build/*
+!build/.gitkeep
