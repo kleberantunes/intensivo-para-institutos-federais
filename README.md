@@ -1,4 +1,4 @@
-# Intensivo IF
+# IFintenso
 
 Plataforma de preparação regionalizada para processos seletivos dos Institutos Federais brasileiros.
 

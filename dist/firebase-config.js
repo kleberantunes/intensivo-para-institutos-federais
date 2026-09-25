@@ -1,4 +1,4 @@
-// Configuração ativa do Firebase para o Intensivo IF (Institutos Federais)
+// Configuração ativa do Firebase para o IFintenso (Institutos Federais)
 window.FIREBASE_CONFIG = {
   apiKey: "AIzaSyCjyrJfpAB5A2ooi0Pg9p44M35RCwG1Xxk",
   authDomain: "intensivo-if-2026.firebaseapp.com",

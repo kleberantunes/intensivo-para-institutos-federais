@@ -1,4 +1,4 @@
-// Painel de Controle de Acesso e Gestão de Alunos - Intensivo IF
+// Painel de Controle de Acesso e Gestão de Alunos - IFintenso
 (async function () {
   const config = window.FIREBASE_CONFIG;
   const adminEmails = window.ADMIN_EMAILS || ["djkleber@gmail.com"];

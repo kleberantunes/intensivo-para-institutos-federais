@@ -1,5 +1,5 @@
 // Módulo de Autenticação com Google e Sincronização em Nuvem (Firebase)
-// Intensivo IF - Institutos Federais
+// IFintenso - Institutos Federais
 
 (async function () {
   const config = window.FIREBASE_CONFIG;
@@ -37,7 +37,7 @@
             <button class="auth-modal-close" onclick="document.getElementById('authSetupModal').remove()">&times;</button>
           </div>
           <div class="auth-modal-body">
-            <p>Para ativar o login com Google no Intensivo IF:</p>
+            <p>Para ativar o login com Google no IFintenso:</p>
             <ol>
               <li>Acesse o <a href="https://console.firebase.google.com" target="_blank" rel="noopener">Firebase Console</a>.</li>
               <li>Em <b>Authentication > Sign-in method</b>, ative o provedor <b>Google</b>.</li>

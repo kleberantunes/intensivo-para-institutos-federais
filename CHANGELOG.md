@@ -5,6 +5,7 @@ Todas as mudanças relevantes deste projeto serão documentadas aqui. O formato 
 ## [0.4.0] - 2026-09-24
 
 ### Adicionado
+- **Identidade do Produto:** Marca renomeada para **IFintenso**.
 - **Autenticação com Google (Firebase Auth):** Login com 1 clique no app dos Institutos Federais.
 - **Sincronização em Nuvem (Cloud Firestore):** Salvamento automático de simulados, acertos, histórico de erros e seleção de instituição/UF.
 - **Arquitetura Local-First Híbrida:** O aplicativo funciona offline via `localStorage` e realiza fusão inteligente ao conectar à conta Google.
