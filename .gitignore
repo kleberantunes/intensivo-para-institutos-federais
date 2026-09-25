@@ -7,3 +7,6 @@ node_modules/
 release/*.zip
 build/*
 !build/.gitkeep
+.firebase/
+firebase-debug.log*
+firestore-debug.log*

@@ -5,14 +5,31 @@ const initial = {state:'',institution:'',level:'integrado',answered:0,correct:0,
 const progress = Object.assign(initial, JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'));
 const data = window.IF_DATA;
 
-function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); }
-function toast(message){ const el=$('#toast'); el.textContent=message; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),2200); }
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  if(window.cloudSync && typeof window.cloudSync.scheduleSave === 'function'){
+    window.cloudSync.scheduleSave(progress);
+  }
+}
+window.toast = toast;
+window.getProgressState = () => progress;
+window.applyCloudProgress = (cloudProgress) => {
+  Object.assign(progress, cloudProgress);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  if(typeof window.refreshRoute === 'function'){
+    window.refreshRoute();
+  }
+};
 function stateInfo(){ return data.states.find(s=>s[0]===progress.state); }
 function questionPool(){ return data.questions.filter(q=>q.region==='BR'||q.region===progress.state); }
+let currentRouteName = 'home', currentRouteArg = null;
 function route(name,arg){
+  currentRouteName = name || 'home';
+  currentRouteArg = arg;
   const pages={home,setup,study,exams,progress:progressPage,quiz};
   (pages[name]||home)(arg); app.focus(); $('#nav').classList.remove('open');
 }
+window.refreshRoute = () => route(currentRouteName, currentRouteArg);
 document.addEventListener('click',e=>{const b=e.target.closest('[data-route]'); if(b) route(b.dataset.route,b.dataset.arg);});
 $('#menuBtn').onclick=()=>$('#nav').classList.toggle('open');
 
