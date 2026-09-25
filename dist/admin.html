@@ -7,8 +7,8 @@
   <meta name="description" content="Dashboard de controle de acesso e acompanhamento pedagógico - IFintenso.">
   <title>Painel de Controle de Acesso · IFintenso</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="styles.css?v=0.7.0">
-  <link rel="stylesheet" href="admin.css?v=0.7.0">
+  <link rel="stylesheet" href="styles.css?v=0.8.0">
+  <link rel="stylesheet" href="admin.css?v=0.8.0">
   <script>
     (function(){
       try {
@@ -17,7 +17,7 @@
         if (saved === 'dark' || (!saved && prefersDark)) {
           document.documentElement.setAttribute('data-theme', 'dark');
           var m = document.querySelector('meta[name="theme-color"]');
-          if (m) m.setAttribute('content', '#091715');
+          if (m) m.setAttribute('content', '#000000');
         }
       } catch(e) {}
     })();
@@ -31,7 +31,7 @@
     </a>
 
     <div class="topbar-actions">
-      <button id="themeToggleBtn" class="btn-theme-toggle" aria-label="Alternar modo escuro" title="Alternar modo escuro">🌙</button>
+      <button id="themeToggleBtn" class="btn-theme-toggle" aria-label="Alternar modo escuro" title="Alternar modo escuro"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
       <a href="index.html" class="btn light" style="font-size: 0.82rem; padding: 8px 14px; text-decoration: none;">← Voltar ao App</a>
       <div id="adminProfile" class="user-profile hidden">
         <img id="adminAvatar" class="user-avatar" src="" alt="Admin">
@@ -44,13 +44,13 @@
   <main id="adminApp">
     <div class="admin-shell">
       <div id="loadingState" style="text-align: center; padding: 80px 20px;">
-        <div style="font-size: 2.2rem; margin-bottom: 12px;">⏳</div>
+        <div style="font-size: 1rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--forest2); margin-bottom: 12px;">Carregando</div>
         <h2 style="color: var(--forest);">Carregando painel de controle...</h2>
         <p style="color: var(--muted);">Verificando permissões de administrador no Firebase.</p>
       </div>
 
       <div id="authGate" class="auth-gate hidden">
-        <div class="auth-gate-icon">🔒</div>
+        <div class="auth-gate-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <h2>Área Restrita</h2>
         <p id="gateMessage">Este painel é de acesso exclusivo para a administração. Faça login com a conta Google autorizada.</p>
         <button id="gateLoginBtn" class="btn primary">Entrar com Google</button>
@@ -67,7 +67,7 @@
             <p>Gerencie permissões de acesso, acompanhe a instituição/UF de cada aluno e monitore o rendimento nos simulados em tempo real.</p>
           </div>
           <div class="admin-actions">
-            <button id="refreshBtn" class="btn light" style="font-size: 0.85rem;">🔄 Atualizar Lista</button>
+            <button id="refreshBtn" class="btn light" style="font-size: 0.85rem;">Atualizar Lista</button>
           </div>
         </div>
 
@@ -103,7 +103,7 @@
         <!-- Filtros e Busca -->
         <section class="filter-bar">
           <div class="search-input-box">
-            <span class="search-icon">🔍</span>
+            <span class="search-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
             <input type="text" id="searchInput" placeholder="Buscar por aluno, e-mail, UF ou Instituto...">
           </div>
           <div>

@@ -60,7 +60,9 @@
         }
       }
       if(btn){
-        btn.textContent = theme === "dark" ? "☀️" : "🌙";
+        const sunSvg = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+        const moonSvg = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+        btn.innerHTML = theme === "dark" ? sunSvg : moonSvg;
         if(typeof btn.setAttribute === 'function'){
           btn.setAttribute("title", theme === "dark" ? "Mudar para tema claro" : "Mudar para tema escuro");
           btn.setAttribute("aria-label", theme === "dark" ? "Mudar para tema claro" : "Mudar para tema escuro");
@@ -68,7 +70,7 @@
       }
       const meta = typeof document !== 'undefined' && typeof document.querySelector === 'function' ? document.querySelector('meta[name="theme-color"]') : null;
       if(meta && typeof meta.setAttribute === 'function'){
-        meta.setAttribute("content", theme === "dark" ? "#091715" : "#063b35");
+        meta.setAttribute("content", theme === "dark" ? "#000000" : "#063b35");
       }
     };
 
@@ -235,7 +237,7 @@
             </td>
             <td>
               <span class="status-badge ${isBlocked ? 'blocked' : 'active'}">
-                ${isBlocked ? '🚫 Bloqueado' : '🟢 Ativo (Liberado)'}
+                ${isBlocked ? 'Bloqueado' : 'Ativo (Liberado)'}
               </span>
             </td>
             <td>
@@ -305,7 +307,7 @@
               <h4>Controle de Acesso</h4>
               <div style="display:flex; justify-content:space-between; align-items:center; background:#f4f8f5; padding:12px 16px; border-radius:12px; border:1px solid var(--line);">
                 <div>
-                  Status Atual: <span class="status-badge ${isBlocked ? 'blocked' : 'active'}">${isBlocked ? '🚫 Bloqueado' : '🟢 Ativo (Liberado)'}</span>
+                  Status Atual: <span class="status-badge ${isBlocked ? 'blocked' : 'active'}">${isBlocked ? 'Bloqueado' : 'Ativo (Liberado)'}</span>
                 </div>
                 <button class="btn-sm ${isBlocked ? 'btn-unblock' : 'btn-block'}" onclick="window.toggleUserStatus('${u.id}', '${isBlocked ? 'active' : 'blocked'}'); window.closeDetailModal();">
                   ${isBlocked ? 'Desbloquear Aluno' : 'Suspender Aluno'}

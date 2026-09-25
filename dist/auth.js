@@ -19,9 +19,9 @@
   const syncStatus = document.getElementById("syncStatus");
   const logoutBtn = document.getElementById("logoutBtn");
 
-  function setSyncStatus(text, icon = "☁️", isPending = false) {
+  function setSyncStatus(text, isPending = false) {
     if (!syncStatus) return;
-    syncStatus.textContent = `${icon} ${text}`.trim();
+    syncStatus.textContent = text.trim();
     syncStatus.className = `sync-badge ${isPending ? 'pending' : 'synced'}`;
   }
 
@@ -45,7 +45,7 @@
               <li>Copie as credenciais da Web App para <code>dist/firebase-config.js</code>.</li>
             </ol>
             <div class="auth-modal-tip">
-              💡 <b>Nota:</b> Enquanto o Firebase não for configurado, seu progresso continuará sendo salvo localmente com total segurança!
+              <b>Nota:</b> Enquanto o Firebase não for configurado, seu progresso continuará sendo salvo localmente com total segurança!
             </div>
           </div>
           <div class="auth-modal-footer">
@@ -113,7 +113,7 @@
     async function syncToCloud(progress) {
       if (!currentUser || !db) return;
       try {
-        setSyncStatus("Salvando...", "⏳", true);
+        setSyncStatus("Salvando...", true);
         const userRef = doc(db, "users", currentUser.uid);
         const dataToSave = {
           ...progress,
@@ -123,10 +123,10 @@
           userPhoto: currentUser.photoURL || ""
         };
         await setDoc(userRef, dataToSave, { merge: true });
-        setSyncStatus("Salvo", "☁️", false);
+        setSyncStatus("Salvo", false);
       } catch (err) {
         console.error("Erro ao sincronizar na nuvem:", err);
-        setSyncStatus("Erro ao sincronizar", "⚠️", false);
+        setSyncStatus("Erro na sincronização", false);
       }
     }
 
@@ -134,7 +134,7 @@
       isReady: () => !!currentUser,
       scheduleSave: (progress) => {
         if (!currentUser) return;
-        setSyncStatus("Salvando...", "⏳", true);
+        setSyncStatus("Salvando...", true);
         clearTimeout(saveTimeout);
         saveTimeout = setTimeout(() => {
           syncToCloud(progress);
@@ -169,7 +169,7 @@
             adminLink.id = "adminPanelLink";
             adminLink.href = "admin.html";
             adminLink.className = "btn-admin-nav";
-            adminLink.innerHTML = "⚙️ Painel Admin";
+            adminLink.innerHTML = "Painel Admin";
             const authContainer = document.getElementById("authContainer");
             if (authContainer) authContainer.prepend(adminLink);
           }
@@ -178,7 +178,7 @@
           adminLink.classList.add("hidden");
         }
 
-        setSyncStatus("Sincronizando...", "⏳", true);
+        setSyncStatus("Sincronizando...", true);
 
         try {
           const userRef = doc(db, "users", user.uid);
@@ -188,7 +188,7 @@
           if (snap.exists()) {
             const cloudData = snap.data();
             if (cloudData.status === "blocked") {
-              setSyncStatus("Acesso suspenso", "🚫", false);
+              setSyncStatus("Acesso suspenso", false);
               alert("Seu acesso a esta plataforma foi suspenso pelo administrador. Entre em contato com a coordenação.");
               await signOut(auth);
               return;
@@ -221,14 +221,14 @@
             });
           }
 
-          setSyncStatus("Sincronizado", "☁️", false);
+          setSyncStatus("Sincronizado", false);
           if (typeof window.onIFLogin === 'function') window.onIFLogin();
           if (typeof window.toast === "function") {
             window.toast(`Bem-vindo, ${(user.displayName || "").split(" ")[0]}! Progresso salvo na nuvem.`);
           }
         } catch (err) {
           console.error("Erro ao carregar dados do usuário:", err);
-          setSyncStatus("Offline / Local", "📱", false);
+          setSyncStatus("Modo Local", false);
           if (typeof window.onIFLogin === 'function') window.onIFLogin();
         }
       } else {

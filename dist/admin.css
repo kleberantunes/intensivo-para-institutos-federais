@@ -1,4 +1,8 @@
 /* Estilos do Dashboard Administrativo - IFintenso */
+*, *::before, *::after {
+  border-radius: 0 !important;
+}
+
 .admin-shell {
   max-width: 1240px;
   margin: 0 auto;
