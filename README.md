@@ -4,7 +4,7 @@ Plataforma de preparação regionalizada para processos seletivos dos Institutos
 
 ## Objetivo
 
-Permitir que cada estudante escolha o estado onde pretende fazer a prova, estude por área em um banco nacional único, acompanhe o próprio desempenho e acesse provas e gabaritos oficiais da sua região.
+Permitir que cada estudante estude por área em um banco nacional único, acompanhe o próprio desempenho e consulte provas e gabaritos oficiais por estado. O login com Google sincroniza o progresso; também é possível estudar sem conta, com dados salvos neste navegador.
 
 ## Público-alvo
 
@@ -17,7 +17,7 @@ Permitir que cada estudante escolha o estado onde pretende fazer a prova, estude
 ## Stack e Arquitetura
 
 - **Frontend:** HTML5 semântico, CSS3 responsivo e JavaScript ES6+ puro, sem dependências de build ou bundlers.
-- **Arquitetura Local-First:** O app funciona 100% offline e sem login, gravando preferências e respostas no `localStorage`.
+- **Arquitetura Local-First:** O estudo pode começar sem login e grava respostas no `localStorage`; o login Google exige conexão.
 - **Autenticação & Nuvem (Firebase):**
   - **Google Sign-In:** Login com 1 clique usando popup OAuth oficial do Google.
   - **Cloud Firestore:** Sincronização contínua do estado, simulados e histórico de erros.
@@ -99,7 +99,8 @@ Painel Admin: `https://ifintenso.web.app/admin.html`
 ## Roadmap
 
 - [x] v0.1.0: Seleção de UF, instituição e modalidade; estudo por área; simulado regional; progresso local.
-- [x] Banco único de questões de todo o Brasil; seleção inicial por UF e modalidade; prioridade à UF escolhida no simulado.
+- [x] Banco único de questões de todo o Brasil, sem seleção obrigatória de UF; provas anteriores filtradas por estado dentro do acervo.
+- [x] Página inicial de login Google com opção de estudo local e questões adaptadas de provas oficiais do IFSC e IFSP, com gabaritos conferidos.
 - [x] v0.4.0: Autenticação Google via Firebase Auth, sincronização no Firestore e Dashboard de controle de acesso e acompanhamento pedagógico (`admin.html`).
 - [ ] v1.0.0: Catálogo nacional ampliado e planos de estudo por edital.
 
