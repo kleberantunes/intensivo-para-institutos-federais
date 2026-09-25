@@ -4,7 +4,7 @@ Plataforma de preparação regionalizada para processos seletivos dos Institutos
 
 ## Objetivo
 
-Permitir que cada estudante escolha o estado e a instituição onde pretende fazer a prova, estude por área, acompanhe o próprio desempenho e acesse provas e gabaritos oficiais da sua região.
+Permitir que cada estudante estude por área em um banco nacional único, acompanhe o próprio desempenho e consulte provas e gabaritos oficiais por estado. O login com Google sincroniza o progresso; também é possível estudar sem conta, com dados salvos neste navegador.
 
 ## Público-alvo
 
@@ -17,10 +17,10 @@ Permitir que cada estudante escolha o estado e a instituição onde pretende faz
 ## Stack e Arquitetura
 
 - **Frontend:** HTML5 semântico, CSS3 responsivo e JavaScript ES6+ puro, sem dependências de build ou bundlers.
-- **Arquitetura Local-First:** O app funciona 100% offline e sem login, gravando preferências e respostas no `localStorage`.
+- **Arquitetura Local-First:** O estudo pode começar sem login e grava respostas no `localStorage`; o login Google exige conexão.
 - **Autenticação & Nuvem (Firebase):**
   - **Google Sign-In:** Login com 1 clique usando popup OAuth oficial do Google.
-  - **Cloud Firestore:** Sincronização contínua do estado, simulados, histórico de erros e instituição escolhida.
+  - **Cloud Firestore:** Sincronização contínua do estado, simulados e histórico de erros.
   - **Smart Merge:** O estudante pode começar no computador sem login; ao entrar com o Google, os dados locais são mesclados com a nuvem sem perda.
 - **Painel de Controle de Acesso (`admin.html`):** Dashboard exclusivo para administradores com métricas de desempenho e controle de suspensão/liberação de acesso com 1 clique.
 
@@ -48,9 +48,9 @@ A plataforma conta com um dashboard administrativo completo localizado em [`dist
 
 ### Recursos do Painel:
 - **Métricas Globais:** Total de estudantes, alunos ativos, alunos bloqueados, total de questões resolvidas e média geral de acertos.
-- **Acompanhamento Regional:** Visualização da UF e Instituto Federal escolhido por cada estudante.
+- **Acompanhamento Regional:** Visualização da UF escolhida por cada estudante.
 - **Controle de Acesso em Tempo Real:** Botão para **Bloquear** ou **Liberar** o acesso de qualquer estudante com 1 clique.
-- **Busca e Filtros:** Pesquisa instantânea por nome, e-mail, UF ou instituição.
+- **Busca e Filtros:** Pesquisa instantânea por nome, e-mail ou UF.
 - **Acompanhamento Pedagógico Individual:** Visualização dos erros recentes e desempenho por matéria de cada aluno.
 - **Atalho Automático:** Quando um e-mail de administrador (configurado em `ADMIN_EMAILS`) faz login no app, um botão **"⚙️ Painel Admin"** aparece na barra superior.
 
@@ -99,6 +99,8 @@ Painel Admin: `https://ifintenso.web.app/admin.html`
 ## Roadmap
 
 - [x] v0.1.0: Seleção de UF, instituição e modalidade; estudo por área; simulado regional; progresso local.
+- [x] Banco único de questões de todo o Brasil, sem seleção obrigatória de UF; provas anteriores filtradas por estado dentro do acervo.
+- [x] Página inicial de login Google com opção de estudo local e 33 questões adaptadas de provas oficiais do IFSC, IFSP, IFG, IFRN e IFPE, com gabaritos conferidos (45 questões no total).
 - [x] v0.4.0: Autenticação Google via Firebase Auth, sincronização no Firestore e Dashboard de controle de acesso e acompanhamento pedagógico (`admin.html`).
 - [ ] v1.0.0: Catálogo nacional ampliado e planos de estudo por edital.
 

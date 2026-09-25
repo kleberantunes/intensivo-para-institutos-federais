@@ -8,6 +8,7 @@
   let auth = null;
   let db = null;
   let currentUser = null;
+  let previouslySignedIn = false;
   let saveTimeout = null;
 
   // Elementos da interface
@@ -77,9 +78,9 @@
       if (!local) return cloud;
 
       const merged = { ...local };
-      merged.state = cloud.state || local.state || '';
-      merged.institution = cloud.institution || local.institution || '';
-      merged.level = cloud.level || local.level || 'integrado';
+      delete merged.state;
+      delete merged.institution;
+      delete merged.level;
 
       if ((cloud.answered || 0) >= (local.answered || 0)) {
         merged.answered = cloud.answered;
@@ -146,6 +147,8 @@
       currentUser = user;
 
       if (user) {
+        previouslySignedIn = true;
+        if (typeof window.useIFAccount === 'function') window.useIFAccount(user.uid);
         if (loginBtn) loginBtn.classList.add("hidden");
         if (userProfile) userProfile.classList.remove("hidden");
         if (userAvatar) {
@@ -219,14 +222,18 @@
           }
 
           setSyncStatus("Sincronizado", "☁️", false);
+          if (typeof window.onIFLogin === 'function') window.onIFLogin();
           if (typeof window.toast === "function") {
             window.toast(`Bem-vindo, ${(user.displayName || "").split(" ")[0]}! Progresso salvo na nuvem.`);
           }
         } catch (err) {
           console.error("Erro ao carregar dados do usuário:", err);
           setSyncStatus("Offline / Local", "📱", false);
+          if (typeof window.onIFLogin === 'function') window.onIFLogin();
         }
       } else {
+        if (previouslySignedIn && typeof window.onIFLogout === 'function') window.onIFLogout();
+        previouslySignedIn = false;
         if (loginBtn) loginBtn.classList.remove("hidden");
         if (userProfile) userProfile.classList.add("hidden");
         const adminLink = document.getElementById("adminPanelLink");
