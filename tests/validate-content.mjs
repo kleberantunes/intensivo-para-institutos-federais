@@ -6,6 +6,7 @@ const sandbox = { window: {} };
 vm.runInNewContext(source, sandbox);
 const data = sandbox.window.IF_DATA;
 const errors = [];
+const seen = new Set();
 
 if (data.states.length !== 27) errors.push(`Esperadas 27 UFs; recebidas ${data.states.length}.`);
 for (const q of data.questions) {
@@ -13,6 +14,8 @@ for (const q of data.questions) {
   if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer >= q.options.length) errors.push(`Gabarito inválido: ${q.text}`);
   if (!q.explanation) errors.push(`Explicação ausente: ${q.text}`);
   if (q.region !== 'BR' && !data.states.some(s => s[0] === q.region)) errors.push(`UF inválida: ${q.region}`);
+  if (seen.has(q.text)) errors.push(`Questão repetida: ${q.text}`);
+  seen.add(q.text);
 }
 const fakeElement = () => ({ innerHTML:'', classList:{toggle(){},remove(){},add(){}}, focus(){}, value:'', onclick:null });
 const elements = new Map();
@@ -36,7 +39,7 @@ if (!elements.get('#app').innerHTML.includes('Estude com questões de todo o Bra
 vm.runInContext("route('study')", appContext);
 if (!elements.get('#app').innerHTML.includes('Banco nacional')) errors.push('O estudo não abriu sem UF.');
 const regions = new Set(vm.runInContext('questionPool().map(q => q.region)', appContext));
-if (!regions.has('SC') || !regions.has('SP')) errors.push('Questões oficiais de SC e SP ausentes no banco.');
+if (!['SC','SP','GO','RN','PE'].every(uf => regions.has(uf))) errors.push('Questões oficiais de SC, SP, GO, RN ou PE ausentes no banco.');
 vm.runInContext("window.useIFAccount('estudante-a'); progress.answered=7; save(); window.onIFLogout(); window.useIFAccount('estudante-b')", appContext);
 if (vm.runInContext('progress.answered', appContext) !== 0) errors.push('O progresso de uma conta vazou para outra.');
 vm.runInContext("window.onIFLogout(); window.useIFAccount('estudante-a')", appContext);

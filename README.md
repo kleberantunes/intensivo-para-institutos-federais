@@ -100,7 +100,7 @@ Painel Admin: `https://ifintenso.web.app/admin.html`
 
 - [x] v0.1.0: Seleção de UF, instituição e modalidade; estudo por área; simulado regional; progresso local.
 - [x] Banco único de questões de todo o Brasil, sem seleção obrigatória de UF; provas anteriores filtradas por estado dentro do acervo.
-- [x] Página inicial de login Google com opção de estudo local e questões adaptadas de provas oficiais do IFSC e IFSP, com gabaritos conferidos.
+- [x] Página inicial de login Google com opção de estudo local e 33 questões adaptadas de provas oficiais do IFSC, IFSP, IFG, IFRN e IFPE, com gabaritos conferidos (45 questões no total).
 - [x] v0.4.0: Autenticação Google via Firebase Auth, sincronização no Firestore e Dashboard de controle de acesso e acompanhamento pedagógico (`admin.html`).
 - [ ] v1.0.0: Catálogo nacional ampliado e planos de estudo por edital.
 
