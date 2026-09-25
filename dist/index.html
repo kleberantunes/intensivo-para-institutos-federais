@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#063b35">
-  <meta name="description" content="Preparação personalizada para processos seletivos dos Institutos Federais do Brasil.">
-  <title>IFintenso — Estude para o Instituto Federal da sua região</title>
+  <meta name="description" content="Plataforma nacional de preparação para processos seletivos dos Institutos Federais do Brasil.">
+  <title>IFintenso — Preparação Nacional para os Institutos Federais</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="styles.css?v=0.5.0">
+  <link rel="stylesheet" href="styles.css?v=0.6.0">
 </head>
 <body>
   <header class="topbar">
     <button class="brand" data-route="home" aria-label="Ir para o início">
       <span class="brand-mark">IF</span>
-      <span><strong>IFintenso</strong><small>Preparação por região</small></span>
+      <span><strong>IFintenso</strong><small>Intensivo Nacional</small></span>
     </button>
 
     <div class="topbar-actions">
@@ -25,7 +25,7 @@
             <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.16 0 9.97 0 12s.45 3.84 1.25 5.42l4.03-3.15z"/>
             <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
           </svg>
-          <span>Entrar</span>
+          <span id="loginBtnText">Entrar com Google</span>
         </button>
         <div id="userProfile" class="user-profile hidden">
           <img id="userAvatar" class="user-avatar" src="" alt="Avatar">
@@ -34,23 +34,22 @@
           <button id="logoutBtn" class="btn-logout" title="Sair da conta">Sair</button>
         </div>
       </div>
-      <button class="menu" id="menuBtn" aria-label="Abrir menu">☰</button>
+      <button class="menu hidden" id="menuBtn" aria-label="Abrir menu">☰</button>
     </div>
 
-    <nav id="nav" aria-label="Navegação principal">
+    <nav id="nav" class="hidden" aria-label="Navegação principal">
       <button data-route="home">Início</button>
       <button data-route="study">Estudar</button>
       <button data-route="exams">Provas anteriores</button>
       <button data-route="progress">Progresso</button>
-      <button data-route="login">Conta</button>
     </nav>
   </header>
   <main id="app" tabindex="-1"></main>
-  <footer><span>v0.5.0</span><span>Developed by AK Labs</span></footer>
+  <footer><span>v0.6.0</span><span>Developed by AK Labs</span></footer>
   <div id="toast" role="status" aria-live="polite"></div>
-  <script src="data.js?v=0.5.0"></script>
+  <script src="data.js?v=0.6.0"></script>
   <script src="firebase-config.js?v=0.4.1"></script>
-  <script src="app.js?v=0.5.0"></script>
-  <script src="auth.js?v=0.5.0"></script>
+  <script src="app.js?v=0.6.0"></script>
+  <script src="auth.js?v=0.6.0"></script>
 </body>
 </html>

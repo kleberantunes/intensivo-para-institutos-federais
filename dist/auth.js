@@ -78,9 +78,9 @@
       if (!local) return cloud;
 
       const merged = { ...local };
-      merged.state = cloud.state || local.state || '';
-      delete merged.institution; // preferência antiga: a seleção agora é feita por UF
-      merged.level = cloud.level || local.level || 'integrado';
+      delete merged.state;
+      delete merged.institution;
+      delete merged.level;
 
       if ((cloud.answered || 0) >= (local.answered || 0)) {
         merged.answered = cloud.answered;
