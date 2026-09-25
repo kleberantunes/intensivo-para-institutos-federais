@@ -96,8 +96,8 @@ if (!elements.get('#app').innerHTML.includes('Banco nacional')) {
 }
 
 const regions = new Set(vm.runInContext('questionPool().map(q => q.region)', appContext));
-if (!['SC', 'SP', 'GO', 'RN', 'PE'].every(uf => regions.has(uf))) {
-  errors.push('Questões oficiais de SC, SP, GO, RN ou PE ausentes no banco.');
+if (!['SC', 'SP', 'GO', 'RN', 'PE', 'MS', 'RS', 'BA', 'MG', 'AL'].every(uf => regions.has(uf))) {
+  errors.push('Questões oficiais de SC, SP, GO, RN, PE, MS, RS, BA, MG ou AL ausentes no banco.');
 }
 
 // 5. Isolamento de contas e bloqueio no logout
