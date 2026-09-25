@@ -106,6 +106,20 @@ if (!elements.get('#app').innerHTML.includes('Banco nacional')) {
   errors.push('O estudo não abriu após autenticação.');
 }
 
+if (data.questions.length < 300) {
+  errors.push(`Esperadas no mínimo 300 questões no banco; recebidas ${data.questions.length}.`);
+}
+
+// Verificação de não divulgação da quantidade de questões disponíveis na interface
+vm.runInContext("route('home')", appContext);
+if (elements.get('#app').innerHTML.includes('questões disponíveis')) {
+  errors.push('A tela inicial não deve divulgar a quantidade de questões disponíveis.');
+}
+vm.runInContext("route('study')", appContext);
+if (elements.get('#app').innerHTML.includes('questões disponíveis')) {
+  errors.push('A tela de estudos não deve divulgar a quantidade de questões disponíveis.');
+}
+
 const regions = new Set(vm.runInContext('questionPool().map(q => q.region)', appContext));
 if (!['SC', 'SP', 'GO', 'RN', 'PE', 'MS', 'RS', 'BA', 'MG', 'AL'].every(uf => regions.has(uf))) {
   errors.push('Questões oficiais de SC, SP, GO, RN, PE, MS, RS, BA, MG ou AL ausentes no banco.');

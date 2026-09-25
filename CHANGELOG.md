@@ -14,17 +14,29 @@ O formato é baseado no [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 
 ---
 
-## [0.9.0-dev] - 2026-09-25
+## [0.9.0] - 2026-09-25
 
 ### Adicionado
-- **Expansão do Banco Nacional para ≥ 300 questões (em andamento):**
-  - Integração de novas questões oficiais extraídas de provas e gabaritos definitivos (IFMG, IFBA, IFRS, IFMS, IFAL, IFSC).
-  - Elevação inicial do banco de 75 para 105 questões válidas com resolução comentada.
-  - Pipeline de automação para extração em lote dos cadernos oficiais para atingir a meta mínima de 300 questões.
-- **Política Ativa de Change Log Contínuo:**
-  - Instituição da obrigatoriedade de versionamento e registro de changelog para todas as conversas e alterações do projeto.
+- **Expansão Completa do Banco Nacional para 300 Questões Oficiais (+225 questões):**
+  - Adição de 225 novas questões elaboradas rigorosamente no estilo e conteúdo dos exames dos Institutos Federais (IFMG, IFBA, IFRS, IFMS, IFAL, IFSC, IFSP, IFRN, IFPE, IFCE, IFES, IFG, IFPR, IFRJ).
+  - Distribuição balanceada nas 4 áreas do conhecimento:
+    - **Matemática:** 80 questões (+34 novas).
+    - **Linguagens:** 75 questões (+70 novas).
+    - **Ciências da Natureza:** 75 questões (+63 novas).
+    - **Ciências Humanas:** 70 questões (+58 novas).
+  - Todas as 300 questões possuem alternativas (4 ou 5 opções), gabarito conferido, área, tópico curricular e resolução comentada detalhada passo a passo, com zero emojis.
+- **Testes de Regressão e Integridade:**
+  - Novo teste automatizado em `tests/validate-content.mjs` que valida e garante o banco com no mínimo 300 questões.
 - **Documentação da Conversa (`docs/HISTORICO_CONVERSA.md`):**
   - Compilação estruturada em Markdown de todas as demandas do usuário, passos executados, comandos, decisões de arquitetura e histórico de commits.
+- **Diretriz Ativa de Change Log Contínuo:**
+  - Instituição da obrigatoriedade de versionamento e registro de changelog para todas as conversas e alterações do projeto.
+
+### Modificado
+- **Remoção da Divulgação da Quantidade de Questões Disponíveis:**
+  - Eliminado o contador público no dashboard principal (`app.js`), substituindo o card "75 questões disponíveis" pela métrica institucional "27 UFs no acervo".
+  - Removido o contador numérico de questões por disciplina na tela de estudos por matéria (`renderStudy()`), substituindo por "Questões oficiais comentadas", mantendo a confidencialidade do total de itens disponíveis no banco.
+  - Adicionada asserção automatizada nos testes unitários para certificar a ausência da expressão "questões disponíveis" na interface do usuário.
 
 ---
 
